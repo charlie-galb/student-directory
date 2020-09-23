@@ -1,26 +1,48 @@
-# First we put the list of students into an array
 def input_students
 
-  puts "Please enter the names of the students"
-  puts "To finish, just hit return twice"
+  cohorts = ["september", "october", "november", "december"]
+
+  puts "Enter the name of a student to add them to the system"
+  puts "To finish, just hit return three times"
   name = gets.chomp
   puts "Please enter the student's country of origin"
   country = gets.chomp
+  while true
+    puts "Please enter the student's cohort"
+    cohort = gets.chomp
+      if cohorts.include?(cohort)
+        break
+      elsif cohort.empty?
+        break
+      end
+  end
+
 
   students = []
 
   while !name.empty? do
 
-    students << {name: name, country: country, cohort: :november}
+    students << {name: name, country: country, cohort: cohort.downcase.to_sym}
     puts "Now we have #{students.count} students"
 
     puts "Please enter the name of a student"
-    puts "To finish, just hit return twice"
+    puts "To finish, just hit return without typing anything"
     name = gets.chomp
 
     if !name.empty?
       puts "Please enter the student's country of origin"
       country = gets.chomp
+      if !country.empty?
+          puts "Please enter the student's cohort"
+          while true
+          cohort = gets.chomp
+            if cohorts.include?(cohort)
+              break
+            end
+          end
+      end
+
+
     end
   end
   students
