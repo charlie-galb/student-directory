@@ -23,7 +23,11 @@ def input_students
   while !name.empty? do
 
     students << {name: name, country: country, cohort: cohort.downcase.to_sym}
-    puts "Now we have #{students.count} students"
+    if students.length == 1
+      puts "Now we have #{students.count} student"
+    else
+      puts "Now we have #{students.count} students"
+    end
 
     puts "Please enter the name of a student"
     puts "To finish, just hit return without typing anything"
@@ -62,7 +66,11 @@ def print(students)
   end
 end
 def print_footer(students)
-  puts "Overall, we have #{students.count} great students"
+  if students.length == 1
+    puts "Overall, we have #{students.count} great student"
+  else
+    puts "Overall, we have #{students.count} great students"
+  end
 end
 
 students = sort_students(input_students)
