@@ -51,6 +51,9 @@ def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
+def sort_students(students)
+  students.sort_by { |student| student[:cohort] }
+end
 def print(students)
   counter = 0
   until counter == students.length
@@ -62,7 +65,7 @@ def print_footer(students)
   puts "Overall, we have #{students.count} great students"
 end
 
-students = input_students
+students = sort_students(input_students)
 print_header
 print(students)
 print_footer(students)
