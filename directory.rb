@@ -87,15 +87,15 @@ def save_students
     puts "Sorry, #{filename} doesn't exist."
     exit
   end
-  file = File.open(filename, "w")
   counter = 0
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
-    counter += 1
+  File.open(filename, "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+      counter += 1
     end
-  file.close
+  end
   puts "Saved #{counter} students to 'students.csv'"
 end
 
@@ -107,14 +107,14 @@ def load_students(filename = "students.csv")
     puts "Sorry, #{filename} doesn't exist"
     exit
   end
-  file = File.open(filename, "r")
   counter = 0
-  file.readlines.each do |line|
-  name, cohort = line.chomp.split(',')
-  add_students(name, cohort)
-  counter += 1
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      name, cohort = line.chomp.split(',')
+      add_students(name, cohort)
+      counter += 1
+    end
   end
-  file.close
   puts "Loaded #{counter} students from #{filename}"
 end
 
