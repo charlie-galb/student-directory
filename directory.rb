@@ -112,7 +112,6 @@ def load_students(filename = "students.csv")
     name, cohort = csv[0], csv[1]
     add_students(name, cohort)
     counter += 1
-
   end
   puts "Loaded #{counter} students from #{filename}"
 end
