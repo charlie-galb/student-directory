@@ -1,10 +1,19 @@
 @students = []
+@cohorts = ["september", "october", "november", "december"]
 def input_students
-  puts "Please enter the names of the students"
+  puts "Please enter the name of a student"
   puts "To finish, just hit return twice"
   name = STDIN.gets.chomp
+
+  while true
+    puts "Please enter the student's cohort"
+    cohort = STDIN.gets.chomp
+    if @cohorts.include?(cohort.downcase)
+      break
+    end
+  end
   while !name.empty? do
-    @students << {name: name, cohort: :november}
+    add_students(name, cohort)
     puts "Now we have #{@students.count} students"
     name = gets.chomp
   end
@@ -75,7 +84,7 @@ def load_students(filename = "students.csv")
   file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
+  add_students(name, cohort)
   end
   file.close
 end
@@ -90,6 +99,10 @@ def try_load_students
     puts "Sorry, #{filename} doesn't exist."
     exit
   end
+end
+
+def add_students(name, cohort)
+  @students << {name: name, cohort: cohort.to_sym}
 end
 
 try_load_students
