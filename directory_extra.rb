@@ -74,6 +74,10 @@ def print_footer(students)
 end
 
 students = sort_students(input_students)
-print_header
-print(students)
-print_footer(students)
+if students.length < 1
+  puts "Sorry, we don't have any students right now.".center(100)
+else
+  print_header
+  print(students)
+  print_footer(students)
+end
