@@ -1,5 +1,6 @@
 @students = []
 @cohorts = ["september", "october", "november", "december"]
+require 'csv'
 
 def input_students
   puts "Please enter the name of a student"
@@ -88,11 +89,10 @@ def save_students
     exit
   end
   counter = 0
-  File.open(filename, "w") do |file|
+
+  CSV.open(filename, "w") do |csv|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      csv << [student[:name], student[:cohort]]
       counter += 1
     end
   end
@@ -108,12 +108,11 @@ def load_students(filename = "students.csv")
     exit
   end
   counter = 0
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      name, cohort = line.chomp.split(',')
-      add_students(name, cohort)
-      counter += 1
-    end
+  CSV.foreach(filename) do |csv|
+    name, cohort = csv[0], csv[1]
+    add_students(name, cohort)
+    counter += 1
+
   end
   puts "Loaded #{counter} students from #{filename}"
 end
