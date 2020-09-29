@@ -34,27 +34,28 @@ end
 
 def input_students
 
+  students = []
+
   while true do
 
     puts "Enter the name of a student to add them to the system".center(100)
     puts "To finish, just hit return three times".center(100)
     student = Student.new
     student.get_name
-    puts "Please enter the student's country of origin".center(100)
-    student.get_country
-    puts "Please enter the student's cohort".center(100)
-    student.get_cohort
+      if student.name.empty?
+        break
+      else
+      puts "Please enter the student's country of origin".center(100)
+      student.get_country
+      puts "Please enter the student's cohort".center(100)
+      student.get_cohort
 
-    students = []
+      students << {name: student.name, country: student.country, cohort: student.cohort.downcase.to_sym}
 
-    if student.name.empty?
-      break
-    else
-        students << {name: student.name, country: student.country, cohort: student.cohort.downcase.to_sym}
       if students.length == 1
         puts "Now we have #{students.count} student".center(100)
       else
-        puts "Now we have #{students.count} students".center(100)
+      puts "Now we have #{students.count} students".center(100)
       end
     end
   end
@@ -66,7 +67,9 @@ def print_header
   puts "-------------".center(100)
 end
 def sort_students(students)
-  students.sort_by { |student| student[:cohort] }
+  if !0
+    students.sort_by { |student| student[:cohort] }
+  end
 end
 def print(students)
   counter = 0
@@ -84,11 +87,11 @@ def print_footer(students)
   end
 end
 
-students = sort_students(input_students)
-if students.length < 1
-  puts "Sorry, we don't have any students right now.".center(100)
-else
+#students = sort_students(input_students)
+#if students.length < 1
+  #puts "Sorry, we don't have any students right now.".center(100)
+#else
+  students = input_students
   print_header
   print(students)
   print_footer(students)
-end
