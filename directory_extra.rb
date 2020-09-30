@@ -39,7 +39,7 @@ def input_students
   while true do
 
     puts "Enter the name of a student to add them to the system".center(100)
-    puts "To finish, just hit return three times".center(100)
+    puts "To finish, just hit return without writing anything".center(100)
     student = Student.new
     student.get_name
       if student.name.empty?
