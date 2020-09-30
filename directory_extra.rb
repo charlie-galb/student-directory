@@ -67,7 +67,7 @@ def print_header
   puts "-------------".center(100)
 end
 def sort_students(students)
-  if !0
+  if students == nil
     students.sort_by { |student| student[:cohort] }
   end
 end
@@ -87,11 +87,13 @@ def print_footer(students)
   end
 end
 
-#students = sort_students(input_students)
-#if students.length < 1
-  #puts "Sorry, we don't have any students right now.".center(100)
-#else
-  students = input_students
+students = input_students
+sort_students(students)
+if students.length < 1
+  puts "Sorry, we don't have any students right now.".center(100)
+else
+  #students = input_students
   print_header
   print(students)
   print_footer(students)
+end
